@@ -8,5 +8,7 @@ ruby '~> 3.0.0'
 
 # gem "rails"
 
+gem 'pry'
+
 gem 'whois'
 gem 'whois-parser'
