@@ -36,14 +36,14 @@ def sh_domains
   end
 end
 
-def sh_domains_availability
-  sh_domains.map do |sh_domain|
+def available_sh_domains
+  sh_domains.select do |sh_domain|
     sleep(2) # Stay below whois rate limit
     record = Whois.whois(sh_domain)
-    { name: sh_domain, available: record.parser.available?, record: record }
+    record.parser.available?
   end
 end
 
 File.open("available_sh_domains.json", "w+") do |f|
-  f.write JSON.pretty_generate({updated: Time.now, domains: sh_domains_availability})
+  f.write JSON.pretty_generate({updated: Time.now, domains: available_sh_domains})
 end
