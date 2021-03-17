@@ -36,19 +36,12 @@ def sh_domains
   end
 end
 
-def available_sh_domains
-  whois = Whois::Client.new(timeout: 10)
-  sh_domains.select do |sh_domain|
-    Whois.whois(sh_domain).parser.available?
+def sh_domains_availability
+  sh_domains.map do |sh_domain|
+    { name: sh_domain, available: Whois.whois(sh_domain).parser.available? }
   end
 end
 
-puts 'Checking domains.'
-
-domains = available_sh_domains
-
-puts "Found #{domains.count} available domains."
-
 File.open("available_sh_domains.json", "w+") do |f|
-  f.write JSON.pretty_generate({updated: Time.now, domains: domains})
+  f.write JSON.pretty_generate({updated: Time.now, domains: sh_domains_availability})
 end
