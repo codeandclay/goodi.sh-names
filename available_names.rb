@@ -38,6 +38,7 @@ end
 
 def sh_domains_availability
   sh_domains.map do |sh_domain|
+    sleep(2) # Stay below whois rate limit
     record = Whois.whois(sh_domain)
     { name: sh_domain, available: record.parser.available?, record: record }
   end
