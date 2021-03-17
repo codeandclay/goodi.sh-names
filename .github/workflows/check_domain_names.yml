@@ -15,7 +15,7 @@ jobs:
         run: |
           git config --local user.email "oliver@codeandclay.com"
           git config --local user.name "codeandclay"
-          git add "available_sh_domains.txt"
+          git add "available_sh_domains.json"
           git commit -m "Update available domains list" -a
       - name: push changes
         uses: ad-m/github-push-action@master

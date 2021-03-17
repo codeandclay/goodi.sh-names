@@ -1,3 +1,4 @@
+require 'json'
 require 'net/http'
 require 'pry'
 require 'whois'
@@ -45,8 +46,6 @@ def available_sh_domains
   end
 end
 
-File.open("available_sh_domains.txt", "w+") do |f|
-  available_sh_domains.each do |domain|
-    f.puts domain
-  end
+File.open("available_sh_domains.json", "w+") do |f|
+  f.write JSON.pretty_generate({updated: Time.now, domains: available_sh_domains})
 end
