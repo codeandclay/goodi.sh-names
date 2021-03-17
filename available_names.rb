@@ -37,10 +37,9 @@ def sh_domains
 end
 
 def available_sh_domains
-  whois = Whois::Client.new
+  whois = Whois::Client.new(timeout: 10)
 
   sh_domains.select do |sh_domain|
-    sleep(2) # So not to exceed whois rate limit
     puts "Checking: #{sh_domain}"
     Whois.whois(sh_domain).parser.available?
   end
