@@ -43,11 +43,11 @@ def available_sh_domains
   end
 end
 
-console.log('Checking domains.')
+puts 'Checking domains.'
 
 domains = available_sh_domains
 
-console.log("Found #{domains.count} available domains.")
+puts "Found #{domains.count} available domains."
 
 File.open("available_sh_domains.json", "w+") do |f|
   f.write JSON.pretty_generate({updated: Time.now, domains: domains})
