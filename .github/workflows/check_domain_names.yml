@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '0 */4 * * *'
 jobs:
   check-domain-names:
     runs-on: macos-latest
