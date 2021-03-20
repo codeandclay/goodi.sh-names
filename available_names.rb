@@ -44,8 +44,9 @@ def available_sh_domains
       record = client.lookup(sh_domain)
     rescue Whois::ConnectionError
       puts error.message
+      sleep(60) # Let's be polite and wait for a bit
+      retry # before retrying
     end
-    puts record # For debugging
     record.parser.available?
   end
 end
