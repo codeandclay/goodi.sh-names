@@ -42,7 +42,7 @@ def available_sh_domains
     sleep(3) # Stay below whois rate limit
     begin
       record = client.lookup(sh_domain)
-    rescue Whois::ConnectionError
+    rescue Whois::ConnectionError, Timeout::Error => error
       puts error.message
       sleep(60) # Let's be polite and wait for a bit
       retry # before retrying
