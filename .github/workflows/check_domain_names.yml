@@ -26,5 +26,5 @@ jobs:
       - name: trigger page build
         run: |
           curl -XPOST -H "Accept: application/vnd.github.v3+json" -u "codeandclay:${{secrets.ACCESS_TOKEN}}" \
-          https://api.github.com/repos/codeandclay/available_domains/actions/workflows/build_site.yml/dispatches \
+          https://api.github.com/repos/codeandclay/goodi.sh-builder/actions/workflows/build_site.yml/dispatches \
           -d '{"ref":"refs/heads/main"}'
