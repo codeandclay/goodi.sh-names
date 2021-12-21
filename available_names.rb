@@ -36,6 +36,10 @@ def sh_domains
   end
 end
 
+def available?(record)
+  record.to_s.lines.first.chomp == "Domain not found."
+end
+
 def available_sh_domains
   client = Whois::Client.new
   sh_domains.select do |sh_domain|
@@ -47,7 +51,8 @@ def available_sh_domains
       sleep(60) # Let's be polite and wait for a bit
       retry # before retrying
     end
-    record.parser.available?
+
+    available?(record)
   end
 end
 
